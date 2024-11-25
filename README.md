@@ -1,7 +1,7 @@
-# solveWaffle.py
+# Waffle Solver
 My attempt to use python to find an optimal solution to this addictive little puzzle.
 
-![example](https://github.com/nyberry/waffle_solver/blob/main/waffle1039.gif)
+![example](https://github.com/nyberry/waffle/blob/main/waffle1039.gif)
 
 
 The first thing is to read the day's Waffle from htpps://wafflegame.net. This is handled by readWaffle() which returns an ordered list of tuples representing each of the puzzle's 21 tiles letter and color.
