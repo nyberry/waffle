@@ -1,5 +1,5 @@
 # Waffle Solver
-An attempt to find optimal solutions to this addictive little puzzle.
+Find an optimal solution to this addictive little puzzle.
 
 ![example](https://github.com/nyberry/waffle/blob/main/waffle1039.gif)
 
