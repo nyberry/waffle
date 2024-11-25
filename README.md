@@ -13,8 +13,6 @@ My attempt to use python to find an optimal solution to this addictive little pu
 
 - **`solve`**: This function uses a depth-limited recursive search to find a sequence of letter-pair swaps that transform the initial grid into the target grid. The recursion depth is limited to 10 because the creators of the Waffle game have confirmed that any puzzle can be solved in 10 moves or fewer. The `preSolve` function optimizes this search by first removing tiles that are already in the correct position or pairs that can be swapped into place in a single move.
 
-- The recursion depth is limited to **10** because the creators of the Waffle game have confirmed that any puzzle can be solved in 10 moves or fewer.
-
 - **`makeAnimation.py`**: This script generates a GIF (`waffle{n}.gif` where `n` is the puzzle number) to visually render one of the optimal solutions.
 
 ## Features
