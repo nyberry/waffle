@@ -3,17 +3,22 @@ My attempt to use python to find an optimal solution to this addictive little pu
 
 ![example](https://github.com/nyberry/waffle/blob/main/waffle1039.gif)
 
+## Description
 
-The first thing is to read the day's Waffle from htpps://wafflegame.net. This is handled by readWaffle() which returns an ordered list of tuples representing each of the puzzle's 21 tiles letter and color.
+- **`readWaffle.py`**: This script reads the day's Waffle puzzle from [https://wafflegame.net](https://wafflegame.net). The `readWaffle()` function returns an ordered list of tuples, each representing one of the puzzle's 21 tiles with its letter and color.
 
-sortedWordList is a list of English 5-letter words. 5792 of them. Filtering the list, keeping only the words which can be formed from the given letter, makes the following recursive algorith faster.
+- **`sortedWordList`**: A list of 5-letter English words (5,792 words in total). By filtering this list to only include words that can be formed from the given letters, the subsequent recursive algorithm becomes more efficient.
 
-fitWords() is a recursive constraint-satisfaction function. Calling it will ultimately yield any arrangement of words from the list which will fit in the grid, taking into account overlaps and the green tiles which have known fixed positions.
+- **`fitWords`**: A recursive constraint-satisfaction function that attempts to fill the Waffle grid by placing words from the filtered word list. It takes into account overlaps and green tiles (which have fixed positions).
 
-solve() uses a depth limited recursive search to find any sequence of letter-pair swaps to transform the initial permutation to the target permutation. PreSolve() first trims this list by removing any tiles which are already in the correct position, or pairs where both elements can be put in the correct position after a simple swap. This makes the recursive function solve() faster.
+- **`solve`**: This function uses a depth-limited recursive search to find a sequence of letter-pair swaps that transform the initial grid into the target grid. The `preSolve` function optimizes this search by first removing tiles that are already in the correct position or pairs that can be swapped into place in a single move.
 
-The recursion depth is limited to 10, because the makers of the Waffle game have told us that the puzzle can always be solved in 10 turns or less.
+- The recursion depth is limited to **10** because the creators of the Waffle game have confirmed that any puzzle can be solved in 10 moves or fewer.
 
-The optimum solutions will be the sequences of swaps of the minimum length.
+- **`makeAnimation.py`**: This script generates a GIF (`waffle{n}.gif` where `n` is the puzzle number) to visually render one of the optimal solutions.
 
-makeAnimation() renders one of the optimal solutions as waffle{n}.gif where n is the puzzle number.
+## Features
+
+- Solve Waffle puzzles by determining optimal word placements.
+- Efficient search using recursive algorithms with constraint satisfaction.
+- Generate an animated GIF of the solution.
