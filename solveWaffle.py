@@ -97,7 +97,7 @@ def canMakeWord(word, A):
             return False
     return True
 
-# Recursive function to solve the waffle puzzle
+# Recursive function to find an arrangement of words that satifies the waffle grid constraints
 def fitWords(filteredWordlist, state, swappableLetters, position = 0):
     if position == 6:  # Base case: all positions filled
         yield(state)
@@ -143,10 +143,13 @@ def placeWord(state, word, position):
         newState[WORDMAP[position][i]] = letter
     return newState
 
+# simplify the original permutation.
+# Only keep letters that are in the wrong place
 def presolve(A,B):
     sequence = []
     state = A
     c = [idx for idx in range(len(state)) if state[idx] != B[idx]]  # Find mismatched indices
+    # iterate through this list and perform any swaps that will correctly place both elements
     for i in range(len(c)):
         for j in range (i+1,len(c)):
             if A[c[i]]==B[c[j]] and A[c[j]]==B[c[i]]:
@@ -154,6 +157,7 @@ def presolve(A,B):
                 state[c[i]],state[c[j]]=state[c[j]],state[c[i]]
     return state, sequence
 
+# depth limited recursive search to find sequences of swaps which will result in the target arrangement
 def solve(state, B, sequence, depth=10):
     if depth <= 0:  # Stop recursion if depth limit is reached
         return
