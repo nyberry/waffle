@@ -1,7 +1,7 @@
 # Waffle Solver
 Find an optimal solution to this tricky little puzzle.
 
-![example](https://github.com/nyberry/waffle/blob/main/waffle1039.gif)
+![example]https://github.com/nyberry/waffle/blob/main/animations/waffle1040.gif
 
 ## Description
 
