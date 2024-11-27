@@ -34,14 +34,14 @@ def main():
         tiles, gameNumber = readWaffle(puzzle)
     else:
         # test case
-        tiles= [('A', 'green'), ('R', 'yellow'), ('R', 'grey'), ('O', 'yellow'), ('N', 'green'), ('S', 'grey'), ('U', 'green'), ('O', 'grey'), ('M', 'yellow'), ('O', 'yellow'), ('T', 'green'), ('T', 'yellow'), ('E', 'yellow'), ('E', 'grey'), ('D', 'grey'), ('G', 'grey'), ('G', 'green'), ('U', 'grey'), ('R', 'green'), ('N', 'grey'), ('E', 'green')]
+        tiles= [('A', 'green'), ('I', 'grey'), ('B', 'green'), ('O', 'grey'), ('Y', 'green'), ('E', 'grey'), ('B', 'grey'), ('E', 'yellow'), ('A', 'grey'), ('U', 'green'), ('N', 'green'), ('L', 'grey'), ('G', 'grey'), ('B', 'yellow'), ('E', 'yellow'), ('U', 'grey'), ('T', 'green'), ('C', 'grey'), ('I', 'yellow'), ('R', 'yellow'), ('D', 'green')]
         gameNumber = 0
         
     # set original state and colors of the 21 letter tiles
     originalState, originalColors = getStateAndColors(tiles)
 
     # Import word list and filter it, keeping only words which can be made with the letters available
-    with open('sortedWordList.txt','r') as file:
+    with open('assets/sortedWordList.txt','r') as file:
         wordlist = [line.strip().upper() for line in file]
     filteredWordlist = [word for word in wordlist if canMakeWord(word, originalState)]
 
@@ -62,8 +62,10 @@ def main():
     if not validWordArrangements:
         sys.exit("No valid word arrangements")
     elif len(validWordArrangements)>1:
-        sys.exit(f'There are {len(validWordArrangements)} valid word arrangments so will need to consider yellow and grey tiles also (not yet coded)')
+        print(f'There are {len(validWordArrangements)} valid word arrangments so will need to consider yellow and grey tiles also (not yet coded)')
+        targetState = validWordArrangements[1]
     else:
+        print(f'There is one valid arrangement {validWordArrangements[0]}')
         targetState = validWordArrangements[0]
     
     # perform all swaps which result in both elements being correctly placed
@@ -71,12 +73,13 @@ def main():
 
     # find all solutions with depth-blimited recursive search
     min_swaps = math.inf
+    swaps = None
     for solution, state in solve(baseState, targetState, sequence, depth = 11-len(sequence)):
         if len(solution)<min_swaps:
             min_swaps = len(solution)
             swaps = solution
     if swaps:
-        animationFilename = f'waffle{gameNumber}.gif'
+        animationFilename = f'animations/waffle{gameNumber}'
         makeAnimation(originalState, targetState, swaps, animationFilename)
         sys.exit(f'Waffle solved and saved as {animationFilename}')
     else:
@@ -143,18 +146,18 @@ def placeWord(state, word, position):
         newState[WORDMAP[position][i]] = letter
     return newState
 
-def presolve(A,B):
+# initial function to swap letter-pairs where both elements will be correctly placed after the swap
+def presolve(initial, target):
     sequence = []
-    state = A
-    c = [idx for idx in range(len(state)) if state[idx] != B[idx]]  # Find mismatched indices
-    for i in range(len(c)):
-        for j in range (i+1,len(c)):
-            if A[c[i]]==B[c[j]] and A[c[j]]==B[c[i]]:
-                sequence.append((c[i],c[j]))
-                state[c[i]],state[c[j]]=state[c[j]],state[c[i]]
+    state = initial[:]
+    for i in range(len(state)):
+        for j in range (i+1,len(state)):
+            if state[i] != state[j] and state[i]==target[j] and state[j]==target[i]:
+                sequence.append((i,j))
+                state[i],state[j]=state[j],state[i]
     return state, sequence
 
-def solve(state, B, sequence, depth=10):
+def solve(state, B, sequence, depth):
     if depth <= 0:  # Stop recursion if depth limit is reached
         return
     
