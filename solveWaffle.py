@@ -15,27 +15,14 @@ from makeAnimation import *
 WORDMAP=[[0,1,2,3,4], [8,9,10,11,12], [16,17,18,19,20], [0,5,8,13,16], [2,6,10,14,18], [4,7,12,15,20]]
 
 def main():
-    # Check usage. Optionally provide an integer argumeht to read a puzzle from the archive
-    if len(sys.argv) not in [1, 2]:
-        sys.exit("Usage: python solveWaffle.py [puzzle] \nUse puzzle = 0 to run without scraping wafflegame.net (this is quicker for testing)")
 
-    if len(sys.argv) == 2:  
-        try:
-            puzzle = int(sys.argv[1])
-            if puzzle < 0:
-                raise ValueError
-        except ValueError:
-            sys.exit("Error: puzzle must be a positive integer.")
-    else:
+    # Load the puzzle    
+    try:
+        puzzle = sys.argv[1]
+    except:
         puzzle = None 
 
-    # if no argument is provided, read today's waffle from web; unless puzzle value=0 in which case run a test case without reading from web
-    if puzzle != 0:
-        tiles, gameNumber = readWaffle(puzzle)
-    else:
-        # test case
-        tiles= [('A', 'green'), ('I', 'grey'), ('B', 'green'), ('O', 'grey'), ('Y', 'green'), ('E', 'grey'), ('B', 'grey'), ('E', 'yellow'), ('A', 'grey'), ('U', 'green'), ('N', 'green'), ('L', 'grey'), ('G', 'grey'), ('B', 'yellow'), ('E', 'yellow'), ('U', 'grey'), ('T', 'green'), ('C', 'grey'), ('I', 'yellow'), ('R', 'yellow'), ('D', 'green')]
-        gameNumber = 0
+    tiles, gameNumber = readWaffle(puzzle)
         
     # set original state and colors of the 21 letter tiles
     originalState, originalColors = getStateAndColors(tiles)
@@ -81,7 +68,7 @@ def main():
     if swaps:
         animationFilename = f'animations/waffle{gameNumber}'
         makeAnimation(originalState, targetState, swaps, animationFilename)
-        sys.exit(f'Waffle solved and saved as {animationFilename}')
+        sys.exit(f'Waffle solved and saved as animations.')
     else:
         sys.exit('no valid sequence of swaps')
 
