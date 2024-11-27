@@ -100,7 +100,7 @@ def canMakeWord(word, A):
             return False
     return True
 
-# Recursive function to solve the waffle puzzle
+# Recursive function to find an arrangement of words that satifies the waffle grid constraints
 def fitWords(filteredWordlist, state, swappableLetters, position = 0):
     if position == 6:  # Base case: all positions filled
         yield(state)
