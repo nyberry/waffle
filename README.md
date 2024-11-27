@@ -1,7 +1,7 @@
 # Waffle Solver
 Find an optimal solution to this tricky little puzzle.
 
-![example]https://github.com/nyberry/waffle/blob/main/animations/waffle1040.gif
+![example](https://github.com/nyberry/waffle/blob/main/animations/waffle1040.gif)
 
 ## Description
 
@@ -20,3 +20,5 @@ Find an optimal solution to this tricky little puzzle.
 - Solve the Waffle puzzle by determining correct word placement.
 - Search for the shortest sequence of swaps to solve the puzzle.
 - Generate an animated GIF of the solution.
+
+![example](https://github.com/nyberry/waffle/blob/main/animations/waffle1039.gif)
