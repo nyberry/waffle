@@ -2,10 +2,6 @@
 
 Clini is a Django web application designed to streamline the extraction of medical data from uploaded clinical documents (PDF) and generate clear, concise reports using AI.
 
-See it in action: [redacted]
-
-Youtube video walkthrough: [redacted]
-
 
 ## 🩺Features (version 1.1, April 15th 2025)
 
