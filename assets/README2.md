@@ -2,9 +2,9 @@
 
 
 
-![Phone Screenshot](staticfiles/images/readme/phonedemoforeadme.jpg)
+![Phone Screenshot](readme/phonedemoforeadme.jpg)
 
-![Report Example](staticfiles/images/readme/reportdemoforeadme.jpg)
+![Report Example](readme/reportdemoforeadme.jpg)
 
 
 Live version: https://www.clini.co.uk
